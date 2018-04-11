@@ -1,0 +1,36 @@
+{
+  "name": "organic-stem-mongodb-storage",
+  "version": "1.0.0",
+  "description": "an mongodbo storage to server stem cells",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Boris Filipov",
+  "license": "MIT",
+  "dependencies": {
+    "organic-stack-upgrade": "^1.1.1"
+  },
+  "devDependencies": {
+    "async-request": "^1.2.0",
+    "eslint": "^4.18.2",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "execa": "^0.10.0",
+    "jest": "^22.4.2",
+    "organic-stem-core-template": "github:node-organic/organic-stem-core-template",
+    "organic-stem-server-express-http-api-cell-template": "github:node-organic/organic-stem-server-express-http-api-cell-template",
+    "terminate": "^2.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/node-organic/organic-stem-mongodb-storage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/node-organic/organic-stem-mongodb-storage/issues"
+  },
+  "homepage": "https://github.com/node-organic/organic-stem-mongodb-storage#readme"
+}

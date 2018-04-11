@@ -1,0 +1,5 @@
+{
+  "host": "{{{mongodb-host}}}",
+  "name": "{{{mongodb-name}}}",
+  "port": {{{mongodb-port}}}
+}
