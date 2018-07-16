@@ -1,0 +1,8 @@
+{
+  "build": {
+    "organic-mongoose": {
+      "source": "organic-mongoose",
+      "database": "@mongodb"
+    }
+  }
+}
