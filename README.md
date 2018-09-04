@@ -7,7 +7,7 @@ an mongodbo storage to server stem cells
 ```
 $ mkdir ./myProject
 $ cd ./myProject
-$ npx organic-stem-mongodb-storage
+$ npx node-organic/organic-stem-mongodb-storage
 ```
 
 ## testing
