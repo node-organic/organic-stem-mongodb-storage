@@ -26,7 +26,7 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
     answers
   })
   let cellName = resulted_answers['cell-name']
-  let cellBuildDNAPath = path.join(destDir, 'cells', cellName, 'dna', 'build.json')
+  let cellBuildDNAPath = path.join(destDir, 'dna', 'cells', cellName + '.json')
   let cellBuildDNAPathExists = await pathExists(cellBuildDNAPath)
   if (!cellBuildDNAPathExists) throw new Error(cellBuildDNAPath + ' required')
   await stack.merge({
