@@ -2,13 +2,20 @@
 
 const StackUpgrade = require('organic-stack-upgrade')
 const path = require('path')
-const fs = require('fs')
+const loadDNA = require('organic-dna-loader')
+const getcells = require('organic-dna-cells-info')
 
-const pathExists = async function (filepath) {
+const getCWD = async function (stack, cellName) {
   return new Promise((resolve, reject) => {
-    fs.stat(filepath, (err, stats) => {
+    loadDNA(path.join(stack.destDir, 'dna'), (err, dna) => {
       if (err) return reject(err)
-      resolve(stats)
+      let cells = getcells(dna.cells)
+      for (let i = 0; i < cells.length; i++) {
+        if (cells[i].name === cellName) {
+          return resolve(cells[i].cwd)
+        }
+      }
+      reject(new Error('cell ' + cellName + ' not found'))
     })
   })
 }
@@ -16,24 +23,27 @@ const pathExists = async function (filepath) {
 const execute = async function ({destDir = process.cwd(), answers} = {}) {
   let stack = new StackUpgrade({
     destDir: destDir,
-    name: 'organic-stem-mongodb-storage',
-    version: '1.0.0'
+    packagejson: path.join(__dirname, '/package.json')
   })
-  let coreTemplateExists = await stack.checkUpgrade('organic-stem-core-template', '^1.0.0')
-  if (!coreTemplateExists) throw new Error('organic-stem-core-template ^1.0.0 required')
-  let resulted_answers = await stack.configure({
-    sourceDir: path.join(__dirname, 'seed'),
+  if (!await stack.checkUpgrade('organic-stem-core-template', '^2.1.0')) {
+    throw new Error('organic-stem-core-template ^2.1.0 not found, are you working into the repo root?')
+  }
+  let resulted_answers = answers || {}
+  if (!resulted_answers['cell-name']) {
+    resulted_answers['cell-name'] = await stack.ask('cell-name?')
+  }
+  resulted_answers['cwd'] = await getCWD(stack, resulted_answers['cell-name'])
+  resulted_answers['dnaCellDirPath'] = path.dirname(resulted_answers['cwd'])
+  resulted_answers = await stack.configure({
+    sourceDirs: [path.join(__dirname, 'seed')],
     answers
   })
-  let cellName = resulted_answers['cell-name']
-  let cellBuildDNAPath = path.join(destDir, 'dna', 'cells', cellName + '.json')
-  let cellBuildDNAPathExists = await pathExists(cellBuildDNAPath)
-  if (!cellBuildDNAPathExists) throw new Error(cellBuildDNAPath + ' required')
   await stack.merge({
     sourceDir: path.join(__dirname, 'seed'),
     answers: resulted_answers
   })
   await stack.updateJSON()
+  let cellName = resulted_answers['cell-name']
   console.info(`run npm install on ${cellName}...`)
   await stack.exec(`npx angel repo cell ${cellName} -- npm install`)
 }

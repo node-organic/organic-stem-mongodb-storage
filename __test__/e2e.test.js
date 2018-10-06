@@ -29,7 +29,8 @@ beforeAll(async () => {
     answers: {
       'cell-name': 'test',
       'cell-port': 13371,
-      'cell-groups': 'default'
+      'cell-groups': ['default'],
+      'cwd': 'test'
     }
   })
 })

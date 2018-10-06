@@ -1,7 +1,7 @@
 {
   "name": "organic-stem-mongodb-storage-template",
-  "version": "1.0.0",
-  "description": "an mongodbo storage to server stem cells",
+  "version": "2.1.0",
+  "description": "adds mongodb storage abilities to server stem cells",
   "main": "index.js",
   "bin": {
     "organic-stem-mongodb-storage-template": "./index.js"
@@ -12,7 +12,9 @@
   "author": "Boris Filipov",
   "license": "MIT",
   "dependencies": {
-    "organic-stack-upgrade": "^1.1.1"
+    "organic-dna-cells-info": "^1.0.0",
+    "organic-dna-loader": "^1.5.1",
+    "organic-stack-upgrade": "^2.0.0"
   },
   "devDependencies": {
     "async-request": "^1.2.0",
@@ -23,7 +25,7 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "execa": "^0.10.0",
-    "jest": "^22.4.2",
+    "jest": "^23.0.0",
     "organic-stem-core-template": "github:node-organic/organic-stem-core-template",
     "organic-stem-server-express-http-api-cell-template": "github:node-organic/organic-stem-server-express-http-api-cell-template",
     "terminate": "^2.1.0"
